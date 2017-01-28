@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% block 'title' %}
+    CMDB-运维管理平台
+{% endblock %}
+{% block 'style' %}
+    <script>
+        function addserver() {
+            var x = document.getElementById("addserver");
+            alert("添加服务器成功")
+        }
+    </script>
+{% endblock %}
+
+{% block 'content' %}
+
+    <div class="col-lg-12">
+
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            服务器列表 &nbsp;&nbsp;&nbsp;&nbsp;
+                            <span><button id="addserver" type="button" class="btn btn-success" onclick="addserver()">添加服务器</button></span>
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>主机名：</th>
+                                            <th>主机IP：</th>
+                                            <th>主机MAC：</th>
+                                            <th>CPU:</th>
+                                            <th>内存情况：</th>
+                                            <th>磁盘情况：</th>
+                                            <th>主机系统：</th>
+                                            <th>内核版本：</th>
+                                            <th>功能</th>
+                                        </tr>
+                                    </thead>
+                                    {% for server in serverdata %}
+                                    <tbody>
+                                        <tr class="success">
+                                            <td>{{ server.id }}</td>
+                                            <td>
+                                                <a href="/server/content/{{ server.id }}">
+                                                    {{ server.host }}
+                                                </a>
+                                            </td>
+                                            <td>{{ server.ip }}</td>
+                                            <td>{{ server.mac }}</td>
+                                            <td>{{ server.cpu }}</td>
+                                            <td>{{ server.mem }}</td>
+                                            <td>{{ server.disk }}</td>
+                                            <td>{{ server.system }}</td>
+                                            <td>{{ server.model }}</td>
+                                            <td>
+                                                <button type="button" class="btn btn-warning">删除</button>
+                                                <button type="button" class="btn btn-danger"><a href="/shell">远程</a></button>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.table-responsive -->
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+
+    <div id="morris-area-chart"></div>
+
+
+
+
+{% endblock %}
